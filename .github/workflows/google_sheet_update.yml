@@ -85,7 +85,7 @@ jobs:
         id: date
         run: |
           delivery_date=${{ github.event.pull_request.created_at }}        
-          echo "::set-output name=date::$(date -d "$delivery_date" +%d/%m/%Y)"
+          echo "date=$(date -d "$delivery_date" +%d/%m/%Y)" >> $GITHUB_OUTPUT
   
       - name: Write data to sheet
         uses: jroehl/gsheet.action@v1.1.1
