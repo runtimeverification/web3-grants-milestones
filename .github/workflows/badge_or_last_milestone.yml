@@ -58,12 +58,12 @@ jobs:
         # A matrix strategy overwrites outputs, meaning `needs_badge` will be `true` if atleast one of the files matches the following condition.
         # This way, there'll only be max 1 comment left per PR
         if: steps.parse-delivery.outputs.milestone_number == 1 && steps.parse-grant.outputs.level != 1
-        run: echo "::set-output name=check::true"
+        run: echo "check=true" >> $GITHUB_OUTPUT
       
       - name: Check if this PR needs a "last milestone" comment
         id: last-milestone
         if: ${{ !steps.parse-delivery.is_maintenance && steps.parse-delivery.outputs.milestone_number == steps.parse-grant.outputs.total_milestones }}
-        run: echo "::set-output name=check::true"
+        run: echo "check=true" >> $GITHUB_OUTPUT
 
   comment-badge:
     runs-on: ubuntu-latest
